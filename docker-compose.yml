@@ -3,6 +3,7 @@ version: '2'
 services:
   db:
     restart: always
+    container_name: mongodb_server
     image: mongo:3.2.3
     volumes:
       - ./leanote_data:/data/db
@@ -18,6 +19,7 @@ services:
       - 9000:9000
     links:
       - db:mongodb
+    container_name: leanote_server
 
     volumes:
       - ./leanote/data:/leanote/data
