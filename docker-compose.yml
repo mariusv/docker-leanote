@@ -8,13 +8,12 @@ services:
       - ./leanote_data:/data/db
 
   server:
-    image: leanote
+    image: mariusv/leanote
     environment:
       - SITE_URL="http://localhost:9000"
     depends_on:
       - db
     restart: always
-    build: .
     ports:
       - 9000:9000
     links:
