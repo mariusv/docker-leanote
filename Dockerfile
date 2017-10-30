@@ -5,6 +5,8 @@ ENV LEANOTE_VERSION=2.5
 RUN apk --update add curl mongodb-tools && \
     curl -L http://sourceforge.net/projects/leanote-bin/files/${LEANOTE_VERSION}/leanote-linux-amd64-v${LEANOTE_VERSION}.bin.tar.gz/download >> \
     /usr/local/leanote-linux-amd64.bin.tar.gz && \
+    curl -L https://raw.githubusercontent.com/mariusv/docker-leanote/master/leanote_install_data.tar.gz >> \
+    /usr/local/leanote_install_data.tar.gz && \
     apk del --purge curl && \
     rm -rf /var/cache/apk/* \
     && tar -xzvf /usr/local/leanote-linux-amd64.bin.tar.gz -C / \
@@ -17,6 +19,8 @@ RUN apk --update add curl mongodb-tools && \
     && ln -s /leanote/data/public/upload /leanote/public/upload \
     && ln -s /leanote/data/files /leanote/files \
     && ln -s /leanote/data/mongodb_backup /leanote/mongodb_backup \
+    && tar zxf /usr/local/leanote_install_data.tar.gz -C /leanote \
+    && rm -f /usr/local/leanote_install_data.tar.gz \
     && chmod +x /leanote/bin/run.sh
 RUN hash=$(< /dev/urandom tr -dc A-Za-z0-9 | head -c${1:-64};echo;); \
     sed -i "s/app.secret=.*$/app.secret=$hash #/" /leanote/conf/app.conf; \
