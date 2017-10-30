@@ -10,5 +10,9 @@ mkdir -p ./leanote/data/{files,mongodb_backup,public/upload}
 
 #### 2. docker-compose up -d
 
+#### 3. Initialize database
 
+```
+docker exec -it leanote_server  mongorestore -h db -d leanote --dir /leanote/leanote_install_data
+```
 
