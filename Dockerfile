@@ -1,6 +1,6 @@
 FROM alpine:latest
 
-ENV LEANOTE_VERSION=2.5
+ENV LEANOTE_VERSION=2.6
 
 RUN apk --update add curl mongodb-tools && \
     curl -L http://sourceforge.net/projects/leanote-bin/files/${LEANOTE_VERSION}/leanote-linux-amd64-v${LEANOTE_VERSION}.bin.tar.gz/download >> \
