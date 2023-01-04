@@ -25,7 +25,8 @@ RUN apk --update add curl mongodb-tools && \
 RUN hash=$(< /dev/urandom tr -dc A-Za-z0-9 | head -c${1:-64};echo;); \
     sed -i "s/app.secret=.*$/app.secret=$hash #/" /leanote/conf/app.conf; \
     sed -i "s/db.host=.*$/db.host=db/" /leanote/conf/app.conf; \
-    sed -i "s/site.url=.*$/site.url=\${SITE_URL} /" /leanote/conf/app.conf;
+    sed -i "s/site.url=.*$/site.url=\${SITE_URL} /" /leanote/conf/app.conf; \
+    sed -i '2i [ -e /leanote/data/app.conf ] && cp -f  /leanote/data/app.conf /leanote/conf/app.conf' /leanote/bin/run.sh;
 
 VOLUME /leanote/data/
 
